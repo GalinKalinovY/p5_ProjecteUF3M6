@@ -1,75 +1,48 @@
-'use strict';
-
 
 const s = ( p ) => {
 
-    var bolaTenis;
+    let bg;
+    var bola = new Ball(p);
+    var goblin = new Player("jugador1",p);
 
     p.setup = function () {
-        p.createCanvas(800, 400);
-        p.createSprite(400, 200, 50, 50);
-        p.dibuixarBolaTenis();
+        p.createCanvas(800, 800);
+        //p.createSprite(400, 200, 50, 50);
+        bg = p.loadImage('images/fondoGalaxia.png');
     }
-
-    p.dibuixarBolaTenis = function() {
-        bolaTenis = p.createSprite(200, 100, 32, 32);
-        bolaTenis.addAnimation('moving', 'images/tennis-ball.png');
-        bolaTenis.addAnimation('spinning', 'images/tennis-ball.png','images/tennis-ball1.png', 'images/tennis-ball2.png','images/tennis-ball3.png');
-
-        bolaTenis.changeAnimation('spinning');
-    }
-    p.moureBolaTenis= function () {
-        if(p.mouseX < bolaTenis.position.x - 10) {
-            bolaTenis.changeAnimation('moving');
-            //flip horizontally
-            bolaTenis.mirrorX(-1);
-            //negative x velocity: move left
-            bolaTenis.velocity.x = -2;
-        }
-        else if(p.mouseX > bolaTenis.position.x + 10) {
-            bolaTenis.changeAnimation('moving');
-            //unflip
-            bolaTenis.mirrorX(1);
-            bolaTenis.velocity.x = 2;
-        }
-        if(p.mouseIsPressed) {
-            //the rotation is not part of the spinning animation
-            bolaTenis.rotation -= 10;
-            bolaTenis.changeAnimation('spinning');
-        }
-        else
-            bolaTenis.rotation = 0;
-    }
-
     p.draw = function () {
-        p.background(0, 0, 0);
+        p.background(bg);
         p.drawSprites();
 
-        p.moureBolaTenis();
+        bola.moureBola(p);
 
-/*
-        //if mouse is to the left
-        if(mouseX < bolaTenis.position.x - 10) {
-            bolaTenis.changeAnimation('moving');
-            //flip horizontally
-            bolaTenis.mirrorX(-1);
-            //negative x velocity: move left
-            bolaTenis.velocity.x = -2;
-        }
-        else if(mouseX > bolaTenis.position.x + 10) {
-            bolaTenis.changeAnimation('moving');
-            //unflip
-            bolaTenis.mirrorX(1);
-            bolaTenis.velocity.x = 2;
-        }
+        movimentJugadors();
 
-        if(mouseIsPressed) {
-            //the rotation is not part of the spinning animation
-            bolaTenis.rotation -= 10;
-            bolaTenis.changeAnimation('spinning');
+
+           /* if (p.key === 'd'){
+                pacman.moveRight();
+                console.log("coordx",pacman.coordX);
+            }
+            if (p.key === 'a'){
+                pacman.moveLeft();
+                console.log("coordx",pacman.coordX);
+            }
+            if (p.key === 'w'){
+                pacman.moveUp();
+                console.log("coordx",pacman.coordY);
+            }
+            if (p.key === 's'){
+                pacman.moveDown();
+                console.log("coordx",pacman.coordY);
+            }*/
         }
-        else
-            bolaTenis.rotation = 0;*/
+    function movimentJugadors() {
+
+        if (p.keyIsDown(p.LEFT_ARROW) ) {
+            goblin.moveLeft();
+        } else if (p.keyIsDown(p.RIGHT_ARROW)) {
+            goblin.moveRight();
+        }
     }
 }
 var myp5 = new p5(s, 'myContainer');
