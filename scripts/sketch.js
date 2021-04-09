@@ -10,12 +10,14 @@ const s = ( p ) => {
         p.createCanvas(800, 800);
         //p.createSprite(400, 200, 50, 50);
         bg = p.loadImage('images/fondoGalaxia.png');
+        bola.iniciJoc();
     }
     p.draw = function () {
         p.background(bg);
         p.drawSprites();
 
-        bola.moureBola(p);
+       // bola.moureBola(p);
+        bola.bounce(p);
 
         movimentJugadors();
 
@@ -40,10 +42,17 @@ const s = ( p ) => {
     function movimentJugadors() {
 
         if (p.keyIsDown(p.LEFT_ARROW) ) {
-            goblin.moveLeft();
+            goblin.moveLeft(p);
         } else if (p.keyIsDown(p.RIGHT_ARROW)) {
-            goblin.moveRight();
+            goblin.moveRight(p);
         }
+
+        if (p.keyIsDown(65)) {
+            monstre.moveLeft(p);
+        } else if (p.keyIsDown(68)) {
+            monstre.moveRight(p);
+        }
+
     }
 }
 var myp5 = new p5(s, 'myContainer');
