@@ -4,6 +4,7 @@ const s = ( p ) => {
     let bg;
     var bola = new Ball(p);
     var goblin = new Player("jugador1",p);
+    var monstre = new Player("jugador2",p);
 
     p.setup = function () {
         p.createCanvas(800, 800);

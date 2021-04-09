@@ -8,6 +8,9 @@ class Player {
             this.spritePlayer.changeAnimation('idle');
         }else if(str == "jugador2"){
             //jugador 2
+            this.spritePlayer = p.createSprite(200, 200, 60, 60);
+            this.spritePlayer.addAnimation('idle', 'images/idleMonster1.png', 'images/idleMonster2.png', 'images/idleMonster3.png', 'images/idleMonster4.png');
+            this.spritePlayer.changeAnimation('idle');
         }
 
 
