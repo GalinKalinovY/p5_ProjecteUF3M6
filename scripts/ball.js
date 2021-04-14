@@ -31,7 +31,7 @@ class Ball{
     bouceJugador(p,player){
         this.spriteBall.collide(player.spritePlayer);
 
-        let veloc = this.spriteBall.getSpeed();
+        let veloc  = this.spriteBall.getSpeed();
         veloc = veloc *1.05;
         var angle = this.spriteBall.getDirection();
 
