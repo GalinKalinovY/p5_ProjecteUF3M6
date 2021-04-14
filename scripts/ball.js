@@ -9,51 +9,76 @@ class Ball{
         this.spriteBall.limitSpeed(10);//el maxim de la velocitat es de 10.
     }
 
-    moureBola(p){
-        if(p.mouseX < this.spriteBall.position.x - 10) {
-            this.spriteBall.changeAnimation('moving');
-            //flip horizontally
-            this.spriteBall.mirrorX(-1);
-            //negative x velocity: move left
-            this.spriteBall.velocity.x = -2;
+    iniciJoc(p){
+        var angle = this.spriteBall.getDirection();
+
+        angle = p.random(210,330);
+        this.spriteBall.position.x =  angle;
+        this.spriteBall.setSpeed(5,angle);
+        this.spriteBall.position.y = 400;
+        this.spriteBall.setVelocity(5 , 5);
+    }
+    tocarBordes(p){
+        if (this.spriteBall.position.y > p.height - this.spriteBall.height/2 ) {
+            console.log(this.spriteBall.position.y);
+            return 1;
         }
-        else if(p.mouseX > this.spriteBall.position.x + 10) {
-            this.spriteBall.changeAnimation('moving');
-            //unflip
-            this.spriteBall.mirrorX(1);
-            this.spriteBall.velocity.x = 2;
-        }
-        if(p.mouseIsPressed) {
-            //the rotation is not part of the spinning animation
-            this.spriteBall.rotation -= 10;
-            this.spriteBall.changeAnimation('spinning');
-        }
-        else {
-            this.spriteBall.rotation = 0;
+        if (this.spriteBall.position.y < this.spriteBall.height/2) {
+            console.log(this.spriteBall.position.y);
+            return 2;
         }
     }
+    bouceJugador(p,player){
+        this.spriteBall.collide(player.spritePlayer);
 
-    iniciJoc(){
-        this.spriteBall.position.x = 600;
-        this.spriteBall.position.y = 200;
-       // this.spriteBall.velocity.x = 2;
-       // this.spriteBall.velocity.y = 2;
-        this.spriteBall.setSpeed(2,-45);
+        let veloc = this.spriteBall.getSpeed();
+        veloc = veloc *1.05;
+        var angle = this.spriteBall.getDirection();
+
+        if (this.spriteBall.position.x < player.spritePlayer.position.x){
+            console.log(this.spriteBall.position.x);
+        }else if(this.spriteBall.position.x >= player.spritePlayer.position.x){
+            //angle= p.random(0,90);
+        }
+        //this.spriteBall.setSpeed( veloc, angle)
     }
     bounce(p){//bounce del mapa
-        if(this.spriteBall.position.x >= p.width){
-            this.spriteBall.setSpeed(5,145);
-        }else if(this.spriteBall.position.x < 0){
-            this.spriteBall.setSpeed(5,-45);
-        }
         var angle = this.spriteBall.getDirection();
+        var xspeed=  this.spriteBall.velocity.x;
+        var yspeed=  this.spriteBall.velocity.y;
+
+        //en el eix de les X
+        if (this.spriteBall.position.x > p.width - this.spriteBall.width/2 || this.spriteBall.position.x < this.spriteBall.width/2) {
+            xspeed = xspeed *-1;
+        }
+        if (this.spriteBall.position.y > p.height - this.spriteBall.height/2 || this.spriteBall.position.y < this.spriteBall.height/2) {
+            yspeed = yspeed *-1;
+        }
+        this.spriteBall.setVelocity(xspeed , yspeed);
+
+        /*
+        if(this.spriteBall.position.x > (p.width - this.spriteBall.width/2)){
+            console.log("angle dreta"+angle);
+            console.log(this.spriteBall.position.x);
+            console.log(p.width);
+            angle += 90;
+            this.spriteBall.position.x =( p.width - this.spriteBall.width )-1;
+            /*if(angle < 270){
+                angle = angle + 60;
+            }
+            if(angle > 270){
+                angle = angle - 60;
+            }
+            this.spriteBall.setSpeed(5,angle);
+        }else if(this.spriteBall.position.x < this.spriteBall.width){
+            console.log("angle esquerra"+angle);
+            this.spriteBall.setSpeed(5,angle-90);
+        }else if(this.spriteBall.position.y > (p.height - this.spriteBall.height/2)){
+            this.spriteBall.setSpeed(5,angle-90);
+        }else if(this.spriteBall.position.y < this.spriteBall.height/2){
+            this.spriteBall.setSpeed(5,angle+90);
+        }
+        */
     }
-    //bounce amb el jugador
-    show(p){
-        /*rocaImng ha de estar definida y cargada ne preload del sketch*/
-        p.image(ballImg,this.coordX,this.coordY);
-    }
-    showInstanceMode(p,ballImg){
-        p.image(ballImg,this.coordX,this.coordY);
-    }
+
 }
