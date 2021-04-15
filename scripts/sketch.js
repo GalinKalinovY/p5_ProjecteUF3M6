@@ -2,11 +2,18 @@
 const s = ( p ) => {
 
     let bg;
-    var bola = new Ball(p);
-    var goblin = new Player("jugador1",p);
-    var monstre = new Player("jugador2",p);
+    let bola;
+    let goblin;
+    let monstre;
+
+    p.preload = function () {
+        bola = new Ball(p);
+        goblin = new Player("jugador1", p);
+        monstre = new Player("jugador2", p);
+    }
 
     p.setup = function () {
+
         p.createCanvas(800, 800);
         //p.createSprite(400, 200, 50, 50);
         bg = p.loadImage('images/fondoGalaxia.png');
@@ -18,6 +25,7 @@ const s = ( p ) => {
 
         bola.bounce(p);
         bola.bouceJugador(p,monstre);
+        bola.bouceJugador(p,goblin);
 
         switch (bola.tocarBordes(p))
         {
