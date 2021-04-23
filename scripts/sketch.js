@@ -13,32 +13,31 @@ const s = ( p ) => {
     }
 
     p.setup = function () {
-
         p.createCanvas(800, 800);
         //p.createSprite(400, 200, 50, 50);
         bg = p.loadImage('images/fondoGalaxia.png');
-        bola.iniciJoc(p);
+        bola.iniciJocInstanceMode(p);
     }
     p.draw = function () {
         p.background(bg);
         p.drawSprites();
 
         bola.bounce(p);
-        bola.bouceJugador(p,monstre);
-        bola.bouceJugador(p,goblin);
+        bola.bouceJugadorInstanceMode(p,monstre);
+        bola.bouceJugadorInstanceMode(p,goblin);
 
-        switch (bola.tocarBordes(p))
+        switch (bola.tocarBordesInstanceMode(p))
         {
             case 1: //punt per jugador 1
                     goblin.punts ++;
                     alert("El jugador 1 ha guanyat 1 punt clica ok per reiniciar la partida.");
-                    bola.iniciJoc(p);
+                    bola.iniciJocAlFerPunt(p,goblin);
                     console.log("Punts del goblin "+goblin.punts);
                     break;
             case 2: //punt per jugador 2
                     monstre.punts++;
                     alert("El jugador 2 ha guanyat 1 punt clica ok per reiniciar la partida.");
-                    bola.iniciJoc(p);
+                    bola.iniciJocAlFerPunt(p,monstre);
                     console.log("Punts del monstre "+monstre.punts);
                     break;
             default:
@@ -64,4 +63,4 @@ const s = ( p ) => {
 
     }
 }
-var myp5 = new p5(s, 'myContainer');
+var myp5 = new p5(s, 'gameContainer');
