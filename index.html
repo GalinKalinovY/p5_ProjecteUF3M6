@@ -8,32 +8,51 @@
   <meta name="description" content="A brief page description">
   <meta name="keywords" content="html,cheatsheet" />
   <meta property="fb:admins" content="YourFacebookUsername" />
-  <title>PRACTICA PACMAN</title>
-  <link rel="stylesheet" href="css/normalized.css">
+  <title>SPACE TENNIS</title>
   <link rel="stylesheet" href="css/styles.css">
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>p5.play Example</title>
 
-  <script src="scripts/ball.js"></script>
-  <script src="scripts/player.js"></script>
-  <script src="scripts/game.js"></script>
-  <!-- link p5.js and its addons like p5.dom.js or p5.sound.js -->
-  <script src="scripts/p5.js"></script>
-  <!-- link p5.play.js -->
-  <script src="scripts/p5.play.js"></script>
-  <!-- link your javascript sketch -->
-  <script src="scripts/formContainerSketch.js"></script>
-  <script src="scripts/sketch.js"></script>
-  <script src="scripts/resultContainerSketch.js"></script>
+    <script src="scripts/ball.js"></script>
+    <script src="scripts/player.js"></script>
+    <script src="scripts/game.js"></script>
+    <!-- link p5.js and its addons like p5.dom.js or p5.sound.js -->
+    <script src="scripts/p5.js"></script>
+    <!-- link p5.play.js -->
+    <script src="scripts/p5.play.js"></script>
+
+    <script type="text/javascript" src="scripts/funcionalitatMenu.js"></script>
+
 </head>
 
 <body>
-<main>
-  <div id="formContainer" class="columnSide"></div>
-  <div id="gameContainer" class="columnMiddle"></div>
-  <div id="resultContainer" class="columnSide"></div>
-</main>
+    <div id="mySidenav" class="sidenav">
+        <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+        <a href="index.html">Home</a>
+        <a href="javascript:void(0)" onclick="funcioInfo()">Info</a>
+        <a href="jocPrincipal.html">Start Game</a>
+        <a href="javascript:void(0)" onclick="funcioAutor()">Info Autor</a>
+        <a href="javascript:void(0)" onclick="helpInfo()">Help</a>
+        <a href=".">Player Settings</a>
+    </div>
+    <span class="menu" style="font-size:30px;cursor:pointer; color: white" onclick="openNav()">&#9776; Menu</span>
+
+  <form action="javascript:formulariUsuari();" id="playerSettings">
+      <label for="nomUsuari">Nom d'usuari:</label><br>
+      <input type="text" id="nomUsuari" name="nomUsuari"><br>
+
+      <label for="contra">Contrasenya: </label><br>
+      <input type="password" id="contra" name="contra" ><br>
+
+      <label for="dificultat">Dificultat:</label><br>
+        <select  name="dificultat" id="dificultat" form="playerSettings">
+            <option value="1">Easy</option>
+            <option value="2">Medium</option>
+            <option value="3">Hard</option>
+        </select>
+      <br><br>
+      <input type="submit" value="Submit">
+  </form>
 </body>
 
 </html>

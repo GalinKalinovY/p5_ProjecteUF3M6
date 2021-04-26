@@ -100,4 +100,10 @@ function tornaBola(spriteA, spriteB) {
     let veloc  = spriteA.getSpeed();
     veloc = veloc *1.05;
     spriteA.setSpeed(veloc);
+
+    spriteB.velocity.y =  (spriteB.velocity.y)*-1;
+
+    let velocB  = spriteB.getSpeed();
+    velocB = velocB *1.05;
+    spriteB.setSpeed(velocB);
 }
