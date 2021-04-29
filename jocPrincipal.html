@@ -23,12 +23,10 @@
   <!-- link p5.play.js -->
   <script src="scripts/p5.play.js"></script>
   <!-- link your javascript sketch -->
-  <script src="scripts/formContainerSketch.js"></script>
-  <script src="scripts/sketch.js"></script>
-  <script src="scripts/resultContainerSketch.js"></script>
-
+  <script type="module" src="scripts/formContainerSketch.js"></script>
+  <script type="module" src="scripts/sketch.js"></script>
+  <script type="module" src="scripts/resultContainerSketch.js"></script>
   <script type="text/javascript" src="scripts/funcionalitatMenu.js"></script>
-  <script type="text/javascript" src="scripts/formContainerSketch.js"></script>
 </head>
 
 <body>
@@ -45,36 +43,35 @@
 
 
   <div id="formContainer" class="columnSide">
-    <form class="formulariJoc" action="javascript:formulariUsuari();" id="playerSettings">
 
-      <label for="numJugadors">Nom:</label><br>
-      <input type="text" id="numJugadors" name="numJugadors"><br>
-
+    <form class="formulariJoc" id="playerSettings">
+      <label for="numJugadors">Numero de jugadors:</label><br>
+      <select name="numJugadors" id="numJugadors" form="playerSettings">
+        <option value="1">Player vs Player</option>
+        <option value="2">Player vs PC</option>
+      </select><br>
       <label for="dificultat">Dificultat:</label><br>
-      <select  name="dificultat" id="dificultat" form="playerSettings">
+      <select name="dificultat" id="dificultat" form="playerSettings">
         <option value="1">Easy</option>
         <option value="2">Medium</option>
         <option value="3">Hard</option>
-      </select>
-      <label for="fondo">Dificultat:</label><br>
-      <select  name="fondo" id="fondo" form="playerSettings">
+      </select><br>
+      <label for="fondo">Fons de pantalla:</label><br>
+      <select name="fondo" id="fondo" form="playerSettings">
         <option value="1">Via Làctea</option>
         <option value="2">Andromeda</option>
         <option value="3">Bima</option>
-      </select>
-      <label for="musica">Dificultat:</label><br>
-      <select  name="musica" id="musica" form="playerSettings">
+      </select><br>
+      <label for="musica">Musica:</label><br>
+      <select name="musica" id="musica" form="playerSettings">
         <option value="1">Attack androides</option>
         <option value="2">Colonitzacio extra-espacial</option>
         <option value="3">Anime</option>
       </select>
-
-      <label for="contra">Contrasenya: </label><br>
-      <input type="password" id="contra" name="contra" ><br>
-
       <br><br>
-    <input type="submit" value="Submit">
-  </form></div>
+      <p id="botoStart" >Game Start</p>
+  </form>
+  </div>
   <div id="gameContainer" class="columnMiddle"></div>
   <div id="resultContainer" class="columnSide"></div>
 </main>

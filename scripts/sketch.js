@@ -1,7 +1,8 @@
-
+import {arrayString} from './formContainerSketch.js';
 const s = ( p ) => {
 
-    let bg;
+    let bgViaLactea;
+    let bgAndromeda;
     let bola;
     let goblin;
     let monstre;
@@ -14,37 +15,43 @@ const s = ( p ) => {
 
     p.setup = function () {
         p.createCanvas(800, 800);
-        //p.createSprite(400, 200, 50, 50);
-        bg = p.loadImage('images/fondoGalaxia.png');
+        bgViaLactea = p.loadImage('images/fondoGalaxia.png');
+        bgAndromeda = p.loadImage('images/fondoAndromeda.jpg');
         bola.iniciJocInstanceMode(p);
     }
     p.draw = function () {
-        p.background(bg);
-        p.drawSprites();
+        if (arrayString[0] == true) {
+            if (arrayString[3] == "1") {
+                console.log("setup "+ arrayString);
+                p.background(bgViaLactea);
+            }else if(arrayString[3] == "2"){
+                p.background(bgAndromeda);
+            }
+            p.drawSprites();
 
-        bola.bounce(p);
-        bola.bouceJugadorInstanceMode(p,monstre);
-        bola.bouceJugadorInstanceMode(p,goblin);
+            bola.bounce(p);
+            bola.bouceJugadorInstanceMode(p, monstre);
+            bola.bouceJugadorInstanceMode(p, goblin);
 
-        switch (bola.tocarBordesInstanceMode(p))
-        {
-            case 1: //punt per jugador 1
-                    goblin.punts ++;
+            switch (bola.tocarBordesInstanceMode(p)) {
+                case 1: //punt per jugador 1
+                    goblin.punts++;
                     alert("El jugador 1 ha guanyat 1 punt clica ok per reiniciar la partida.");
-                    bola.iniciJocAlFerPunt(p,goblin);
-                    console.log("Punts del goblin "+goblin.punts);
+                    bola.iniciJocAlFerPunt(p, goblin);
+                    console.log("Punts del goblin " + goblin.punts);
                     break;
-            case 2: //punt per jugador 2
+                case 2: //punt per jugador 2
                     monstre.punts++;
                     alert("El jugador 2 ha guanyat 1 punt clica ok per reiniciar la partida.");
-                    bola.iniciJocAlFerPunt(p,monstre);
-                    console.log("Punts del monstre "+monstre.punts);
+                    bola.iniciJocAlFerPunt(p, monstre);
+                    console.log("Punts del monstre " + monstre.punts);
                     break;
-            default:
+                default:
+            }
+
+            movimentJugadors();
+
         }
-
-        movimentJugadors();
-
     }
 
     function movimentJugadors() {
