@@ -7,9 +7,12 @@ const s = ( p ) => {
     let bgAndromeda;
     let bgBima;
 
-    let bola;100
+    let bola;
     let goblin;
     let monstre;
+    var song1;
+    var song2;
+    var song3;
 
     p.preload = function () {
         bola = new Ball(p);
@@ -22,7 +25,15 @@ const s = ( p ) => {
         bgViaLactea = p.loadImage('images/fondoGalaxia.png');
         bgAndromeda = p.loadImage('images/fondoAndromeda.jpg');
         bgBima = p.loadImage('images/fondoBima.jpg');
+
+        p.soundFormats('wav' , 'ogg');
+        song1 = p.loadSound('soJoc/song1.wav');
+        song2 = p.loadSound('soJoc/song2.wav');
+        song3 = p.loadSound('soJoc/song3.wav');
         bola.iniciJocInstanceMode(p);
+        if (arrayString[0] == true) {
+            p.sonsMusica();
+        }
     }
 
     p.dibuixarFons =  function(){
@@ -41,6 +52,15 @@ const s = ( p ) => {
             bola.setSpeed(6);
         }else if(arrayString[2] == "3"){
             bola.setSpeed(10);
+        }
+    }
+    p.sonsMusica = function(){
+        if (arrayString[4] == "1") {
+            song1.play();
+        }else if(arrayString[4] == "2"){
+            song2.play();
+        }else if(arrayString[4] == "3"){
+            song3.play();
         }
     }
 
@@ -73,7 +93,6 @@ const s = ( p ) => {
             }
 
             movimentJugadors();
-
         }
     }
 
