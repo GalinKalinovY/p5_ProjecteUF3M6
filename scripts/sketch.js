@@ -1,10 +1,18 @@
+import {arrayString} from './formContainerSketch.js';
+export var jugador1,jugador2,inciJoc;
 
 const s = ( p ) => {
 
-    let bg;
+    let bgViaLactea;
+    let bgAndromeda;
+    let bgBima;
+
     let bola;
     let goblin;
     let monstre;
+    var song1;
+    var song2;
+    var song3;
 
     p.preload = function () {
         bola = new Ball(p);
@@ -13,39 +21,79 @@ const s = ( p ) => {
     }
 
     p.setup = function () {
-
         p.createCanvas(800, 800);
-        //p.createSprite(400, 200, 50, 50);
-        bg = p.loadImage('images/fondoGalaxia.png');
-        bola.iniciJoc(p);
-    }
-    p.draw = function () {
-        p.background(bg);
-        p.drawSprites();
+        bgViaLactea = p.loadImage('images/fondoGalaxia.png');
+        bgAndromeda = p.loadImage('images/fondoAndromeda.jpg');
+        bgBima = p.loadImage('images/fondoBima.jpg');
 
-        bola.bounce(p);
-        bola.bouceJugador(p,monstre);
-        bola.bouceJugador(p,goblin);
-
-        switch (bola.tocarBordes(p))
-        {
-            case 1: //punt per jugador 1
-                    goblin.punts ++;
-                    alert("El jugador 1 ha guanyat 1 punt clica ok per reiniciar la partida.");
-                    bola.iniciJoc(p);
-                    console.log("Punts del goblin "+goblin.punts);
-                    break;
-            case 2: //punt per jugador 2
-                    monstre.punts++;
-                    alert("El jugador 2 ha guanyat 1 punt clica ok per reiniciar la partida.");
-                    bola.iniciJoc(p);
-                    console.log("Punts del monstre "+monstre.punts);
-                    break;
-            default:
+        p.soundFormats('wav' , 'ogg');
+        song1 = p.loadSound('soJoc/song1.wav');
+        song2 = p.loadSound('soJoc/song2.wav');
+        song3 = p.loadSound('soJoc/song3.wav');
+        bola.iniciJocInstanceMode(p);
+        if (arrayString[0] == true) {
+            p.sonsMusica();
         }
+    }
 
-        movimentJugadors();
+    p.dibuixarFons =  function(){
+        if (arrayString[3] == "1") {
+            p.background(bgViaLactea);
+        }else if(arrayString[3] == "2"){
+            p.background(bgAndromeda);
+        }else if(arrayString[3] == "3"){
+            p.background(bgBima);
+        }
+    }
+    p.nivellJoc = function(){
+        if (arrayString[2] == "1") {
+            bola.setSpeed(2);
+        }else if(arrayString[2] == "2"){
+            bola.setSpeed(6);
+        }else if(arrayString[2] == "3"){
+            bola.setSpeed(10);
+        }
+    }
+    p.sonsMusica = function(){
+        if (arrayString[4] == "1") {
+            song1.play();
+        }else if(arrayString[4] == "2"){
+            song2.play();
+        }else if(arrayString[4] == "3"){
+            song3.play();
+        }
+    }
 
+    p.draw = function () {
+        if (arrayString[0] == true) {
+            p.dibuixarFons();
+            p.drawSprites();
+            inciJoc=true;
+
+            bola.bounce(p);
+            bola.bouceJugadorInstanceMode(p, monstre);
+            bola.bouceJugadorInstanceMode(p, goblin);
+
+            switch (bola.tocarBordesInstanceMode(p)) {
+                case 1: //punt per jugador 1
+                    goblin.punts++;
+                    jugador1=[goblin.punts];
+                    alert("El jugador 1 ha guanyat 1 punt clica ok per reiniciar la partida.");
+                    bola.iniciJocAlFerPunt(p, goblin, arrayString);
+                    console.log("Punts del goblin " + goblin.punts);
+                    break;
+                case 2: //punt per jugador 2
+                    monstre.punts++;
+                    jugador2=[monstre.punts];
+                    alert("El jugador 2 ha guanyat 1 punt clica ok per reiniciar la partida.");
+                    bola.iniciJocAlFerPunt(p, monstre, arrayString);
+                    console.log("Punts del monstre " + monstre.punts);
+                    break;
+                default:
+            }
+
+            movimentJugadors();
+        }
     }
 
     function movimentJugadors() {
@@ -64,4 +112,4 @@ const s = ( p ) => {
 
     }
 }
-var myp5 = new p5(s, 'myContainer');
+var myp5 = new p5(s, 'gameContainer');

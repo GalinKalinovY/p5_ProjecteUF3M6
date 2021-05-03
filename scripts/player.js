@@ -1,3 +1,6 @@
+const posicioX = 400;
+const posicioY = 50;
+
 
 class Player {
 
@@ -5,7 +8,7 @@ class Player {
     constructor(str,p) {
         this.speed = 15;
         if (str == "jugador1") {
-            this.spritePlayer = p.createSprite(400, 50, 60, 60);
+            this.spritePlayer = p.createSprite(posicioX, posicioY, 60, 60);
             this.spritePlayer.addAnimation('idle', 'images/goblinIdle1.png', 'images/goblinIdle2.png', 'images/goblinIdle3.png', 'images/goblinIdle4.png');
             this.spritePlayer.changeAnimation('idle');
             this.punts = 0;
