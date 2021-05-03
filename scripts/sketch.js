@@ -66,8 +66,9 @@ const s = ( p ) => {
             p.dibuixarFons();
             p.drawSprites();
             inciJoc=true;
-            //p.sonsMusica();
-            
+            if(!song1.isPlaying() || !song2.isPlaying() || !song3.isPlaying()){
+                p.sonsMusica();
+            }
             bola.bounce(p);
             bola.bouceJugadorInstanceMode(p, monstre);
             bola.bouceJugadorInstanceMode(p, goblin);
