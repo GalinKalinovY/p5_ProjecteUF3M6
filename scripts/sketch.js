@@ -66,7 +66,7 @@ const s = ( p ) => {
             p.dibuixarFons();
             p.drawSprites();
             inciJoc=true;
-            p.sonsMusica();
+            //p.sonsMusica();
             
             bola.bounce(p);
             bola.bouceJugadorInstanceMode(p, monstre);
