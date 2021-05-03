@@ -31,9 +31,6 @@ const s = ( p ) => {
         song2 = p.loadSound('soJoc/song2.wav');
         song3 = p.loadSound('soJoc/song3.wav');
         bola.iniciJocInstanceMode(p);
-        if (arrayString[0] == true) {
-            p.sonsMusica();
-        }
     }
 
     p.dibuixarFons =  function(){
@@ -69,7 +66,8 @@ const s = ( p ) => {
             p.dibuixarFons();
             p.drawSprites();
             inciJoc=true;
-
+            p.sonsMusica();
+            
             bola.bounce(p);
             bola.bouceJugadorInstanceMode(p, monstre);
             bola.bouceJugadorInstanceMode(p, goblin);
