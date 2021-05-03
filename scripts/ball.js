@@ -1,12 +1,11 @@
 class Ball{
     constructor(p){//passar la velocitat a partir de la dificultat
         this.angle= 5;
-        this.spriteBall = p.createSprite(200, 100, 32, 32);
+        this.spriteBall = p.createSprite(400, 400, 32, 32);
         this.spriteBall.addAnimation('moving', 'images/tennis-ball.png');
         this.spriteBall.addAnimation('spinning', 'images/tennis-ball.png','images/tennis-ball1.png', 'images/tennis-ball2.png','images/tennis-ball3.png');
         this.spriteBall.changeAnimation('spinning');
-        this.spriteBall.limitSpeed(10);//el maxim de la velocitat es de 10.
-        this.spriteBall.setSpeed(2);
+        this.spriteBall.limitSpeed(20);//el maxim de la velocitat es de 10.
     }
     /*constructor(){
         this.angle= 5;
@@ -18,7 +17,7 @@ class Ball{
         this.spriteBall.setSpeed(2);
     }*/
 
-    iniciJocAlFerPunt(p,str){
+    iniciJocAlFerPunt(p,str,arrayString){
         this.spriteBall.position.x =  400;
         this.spriteBall.position.y = 400;
 
@@ -26,7 +25,7 @@ class Ball{
             var angle = this.spriteBall.getDirection();
             angle = p.random(210, 330);
             while(angle > 260 && angle < 280) {
-                  angle = p.random(210, 330);
+                angle = p.random(210, 330);
             }
         }else if (str == "jugador2"){
             var angle = this.spriteBall.getDirection();
@@ -35,7 +34,14 @@ class Ball{
                 angle = p.random(60, 140);
             }
         }
-        this.spriteBall.setSpeed(2, angle);
+
+        if (arrayString[2] == "1") {
+            this.spriteBall.setSpeed(2, angle);
+        }else if(arrayString[2] == "2"){
+            this.spriteBall.setSpeed(2, angle);
+        }else if(arrayString[2] == "3"){
+            this.spriteBall.setSpeed(2, angle);
+        }
     }
     iniciJocInstanceMode(p){
         this.spriteBall.position.x =  400;
@@ -98,12 +104,14 @@ function tornaBola(spriteA, spriteB) {
     spriteA.velocity.y =  (spriteA.velocity.y)*-1;
 
     let veloc  = spriteA.getSpeed();
-    veloc = veloc *1.05;
+    veloc = veloc *1.10;
     spriteA.setSpeed(veloc);
 
     spriteB.velocity.y =  (spriteB.velocity.y)*-1;
 
     let velocB  = spriteB.getSpeed();
-    velocB = velocB *1.05;
+    velocB = velocB *1.10;
     spriteB.setSpeed(velocB);
+
+
 }

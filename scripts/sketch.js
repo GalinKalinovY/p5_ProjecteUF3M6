@@ -1,9 +1,13 @@
 import {arrayString} from './formContainerSketch.js';
+export var jugador1,jugador2,inciJoc;
+
 const s = ( p ) => {
 
     let bgViaLactea;
     let bgAndromeda;
-    let bola;
+    let bgBima;
+
+    let bola;100
     let goblin;
     let monstre;
 
@@ -17,17 +21,34 @@ const s = ( p ) => {
         p.createCanvas(800, 800);
         bgViaLactea = p.loadImage('images/fondoGalaxia.png');
         bgAndromeda = p.loadImage('images/fondoAndromeda.jpg');
+        bgBima = p.loadImage('images/fondoBima.jpg');
         bola.iniciJocInstanceMode(p);
     }
+
+    p.dibuixarFons =  function(){
+        if (arrayString[3] == "1") {
+            p.background(bgViaLactea);
+        }else if(arrayString[3] == "2"){
+            p.background(bgAndromeda);
+        }else if(arrayString[3] == "3"){
+            p.background(bgBima);
+        }
+    }
+    p.nivellJoc = function(){
+        if (arrayString[2] == "1") {
+            bola.setSpeed(2);
+        }else if(arrayString[2] == "2"){
+            bola.setSpeed(6);
+        }else if(arrayString[2] == "3"){
+            bola.setSpeed(10);
+        }
+    }
+
     p.draw = function () {
         if (arrayString[0] == true) {
-            if (arrayString[3] == "1") {
-                console.log("setup "+ arrayString);
-                p.background(bgViaLactea);
-            }else if(arrayString[3] == "2"){
-                p.background(bgAndromeda);
-            }
+            p.dibuixarFons();
             p.drawSprites();
+            inciJoc=true;
 
             bola.bounce(p);
             bola.bouceJugadorInstanceMode(p, monstre);
@@ -36,14 +57,16 @@ const s = ( p ) => {
             switch (bola.tocarBordesInstanceMode(p)) {
                 case 1: //punt per jugador 1
                     goblin.punts++;
+                    jugador1=[goblin.punts];
                     alert("El jugador 1 ha guanyat 1 punt clica ok per reiniciar la partida.");
-                    bola.iniciJocAlFerPunt(p, goblin);
+                    bola.iniciJocAlFerPunt(p, goblin, arrayString);
                     console.log("Punts del goblin " + goblin.punts);
                     break;
                 case 2: //punt per jugador 2
                     monstre.punts++;
+                    jugador2=[monstre.punts];
                     alert("El jugador 2 ha guanyat 1 punt clica ok per reiniciar la partida.");
-                    bola.iniciJocAlFerPunt(p, monstre);
+                    bola.iniciJocAlFerPunt(p, monstre, arrayString);
                     console.log("Punts del monstre " + monstre.punts);
                     break;
                 default:
